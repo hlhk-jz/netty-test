@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package com.grpcpk;
+
+option java_package = "com.grpcpk";
+option java_outer_classname = "Persion";
+option java_multiple_files = true;
+
+service StudentService{
+    rpc GetUserName(MyRequest) returns (MyResponse){}
+    rpc GetStuById(StudentRequest) returns (stream StudentResponse){}
+    rpc GetStudnetList(stream MyRequest) returns (StudentResponseList){}
+    rpc StreamInfoById(stream StreamRequest) returns (stream StreamResponse){}
+}
+
+message StreamRequest{
+   string requestId = 1;
+}
+message StreamResponse{
+   string responseId = 1;
+}
+
+message StudentResponseList{
+   repeated StudentResponse studentResponse = 1;
+}
+
+message StudentResponse{
+   string id = 1;
+   string name = 2;
+   string age = 3;
+   string home = 4;
+}
+
+message StudentRequest{
+    string id = 1;
+}
+
+message MyRequest{
+   string username = 1;
+}
+
+message MyResponse{
+   string realname = 1;
+}
